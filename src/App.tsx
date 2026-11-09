@@ -59,7 +59,7 @@ function Page() {
           <div className="container hero__inner">
             <div className="hero__copy">
               <p className="eyebrow">Oniru, Victoria Island</p>
-              <h1 className="display" id="hero-title">Montego Skyline II, A city in sky. <Accent>Where Lagos Meets the World</Accent></h1>
+              <h1 className="display" id="hero-title">Montego Skyline II, A city in the Sky. <Accent>Where Lagos Meets the World</Accent></h1>
               <p className="lede">Two sculptural towers on Victoria Island&rsquo;s Atlantic edge: a vertical city of luxury residences, five-star hospitality, world-class healthcare, private banking, fine dining and wellness.</p>
               <div className="hero__cta">
                 <Btn variant="light" arrow href="#development">Discover the Development</Btn>
@@ -318,7 +318,7 @@ function Page() {
       <footer className="footer">
         <div className="container">
           <div className="footer__top">
-            <a className="footer__brand" href="#top" aria-label="Henry Montego Homes — back to top"><img src="assets/logo/logo-dark.png" alt="Henry Montego Homes" width={959} height={424} loading="lazy" /></a>
+            <a className="footer__brand" href="#top" aria-label="Henry Montego Homes — back to top"><img src="assets/logo/logo-dark.png" alt="Henry Montego Homes" width={1080} height={365} loading="lazy" /></a>
             <p className="footer__statement">Creating developments that elevate African real estate to the highest global standard.</p>
             <EnquiryLink className="btn btn--dark">Request a Private Briefing <Icon name="arrow" /></EnquiryLink>
           </div>
