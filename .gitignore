@@ -2,3 +2,6 @@ Photos/
 Reference.png
 Skyline Brochure.pdf
 .taste-skill/
+node_modules/
+dist/
+*.tsbuildinfo
