@@ -318,7 +318,7 @@ function Page() {
       <footer className="footer">
         <div className="container">
           <div className="footer__top">
-            <a className="footer__brand" href="#top" aria-label="Henry Montego Homes — back to top"><img src="assets/logo/logo-dark.png" alt="Henry Montego Homes" width={1080} height={365} loading="lazy" /></a>
+            <a className="footer__brand" href="#top" aria-label="Henry Montego Homes — back to top"><img src="assets/logo/logo.png" alt="Henry Montego Homes" width={1310} height={580} loading="lazy" /></a>
             <p className="footer__statement">Creating developments that elevate African real estate to the highest global standard.</p>
             <EnquiryLink className="btn btn--dark">Request a Private Briefing <Icon name="arrow" /></EnquiryLink>
           </div>
