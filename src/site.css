@@ -314,7 +314,8 @@ section[id] { scroll-margin-top: calc(var(--header-h) - 1px); }
 .pillar { background: var(--white); transition: background 0.5s var(--ease-out); border-radius: 0; box-shadow: none; padding: clamp(26px, 3vw, 42px); gap: 0; align-items: flex-start; }
 .pillar > * { padding: 0; width: 100%; }
 @media (hover: hover) { .pillar:hover { background: var(--offwhite); } }
-.pillar__num { height: auto; padding: 0; border: 0; background: none; border-radius: 0; font-size: 0.75rem; font-weight: 400; letter-spacing: 0.22em; color: var(--royal); margin-bottom: 18px; }
+.pillar__icon { width: 34px; height: 34px; color: var(--royal); margin-bottom: 22px; transition: transform 0.5s var(--ease-out); }
+@media (hover: hover) { .pillar:hover .pillar__icon { transform: translateY(-3px); } }
 .pillar__title { font-family: var(--serif); font-size: 1.7rem; font-weight: 500; line-height: 1.15; color: var(--midnight); }
 .pillar__text { margin-top: 12px; font-size: 0.975rem; line-height: 1.65; color: var(--ink-soft); }
 .pillar__foot { margin-top: auto; padding-top: 22px; background: none; border: 0; }

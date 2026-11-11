@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { LaptopMinimal, Building2, ConciergeBell, HeartPulse, Landmark, UtensilsCrossed, Waves } from "lucide-react"
 import { config } from "@/config"
 import { Header } from "@/components/Header"
 import { ArchitectureCarousel } from "@/components/ArchitectureCarousel"
@@ -12,13 +12,13 @@ import { Btn, EnquiryLink, EnquiryProvider, Icon, useReveal } from "@/components
 const waHello = `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent("Hello, I'd like to know more about Montego Skyline II.")}`
 
 const pillars = [
-  { title: "Signature Residences", text: "Panoramic homes with private pool terraces, refined interiors and exceptional finishes, designed for those who expect more from where they live.", link: "View the floor plan", href: "#residences" },
-  { title: "Hospitality", text: "A hotel-grade arrival experience and guest services that bring five-star standards to everyday living.", link: "Ask about hospitality", type: "Healthcare or hospitality partnership" },
-  { title: "Healthcare", text: "Modern medical facilities within the towers, so world-class care is always a lift ride away.", link: "Ask about healthcare", type: "Healthcare or hospitality partnership" },
-  { title: "Private Banking and Finance", text: "Convenient financial services under the same roof, built for residents, tenants and visitors alike.", link: "Ask about banking", type: "General enquiry" },
-  { title: "Fine Dining and Retail", text: "Destination restaurants and curated retail behind a glazed, landscaped frontage on Remi-Olowude.", link: "Ask about retail and dining", type: "Retail or hospitality space" },
-  { title: "Wellness and Spa", text: "Infinity pools, a spa and a fitness centre designed to resort standards, at the ocean's edge.", link: "Ask about wellness", type: "General enquiry" },
-  { title: "Workspaces", text: "Premium offices where business on Victoria Island begins at your doorstep.", link: "Ask about workspaces", type: "Workspace" },
+  { title: "Signature Residences", icon: Building2, text: "Panoramic homes with private pool terraces, refined interiors and exceptional finishes, designed for those who expect more from where they live.", link: "View the floor plan", href: "#residences" },
+  { title: "Hospitality", icon: ConciergeBell, text: "A hotel-grade arrival experience and guest services that bring five-star standards to everyday living.", link: "Ask about hospitality", type: "Healthcare or hospitality partnership" },
+  { title: "Healthcare", icon: HeartPulse, text: "Modern medical facilities within the towers, so world-class care is always a lift ride away.", link: "Ask about healthcare", type: "Healthcare or hospitality partnership" },
+  { title: "Private Banking and Finance", icon: Landmark, text: "Convenient financial services under the same roof, built for residents, tenants and visitors alike.", link: "Ask about banking", type: "General enquiry" },
+  { title: "Fine Dining and Retail", icon: UtensilsCrossed, text: "Destination restaurants and curated retail behind a glazed, landscaped frontage on Remi-Olowude.", link: "Ask about retail and dining", type: "Retail or hospitality space" },
+  { title: "Wellness and Spa", icon: Waves, text: "Infinity pools, a spa and a fitness centre designed to resort standards, at the ocean's edge.", link: "Ask about wellness", type: "General enquiry" },
+  { title: "Workspaces", icon: LaptopMinimal, text: "Premium offices where business on Victoria Island begins at your doorstep.", link: "Ask about workspaces", type: "Workspace" },
 ]
 
 const clusters = [
@@ -110,10 +110,10 @@ function Page() {
               <p className="lede">Montego Skyline II is designed as a complete, self-sustaining destination, where every part of daily life is considered and close at hand.</p>
             </header>
             <div className="pillars" data-reveal style={{ ["--d" as string]: ".12s" }}>
-              {pillars.map((p, i) => (
+              {pillars.map((p) => (
                 <Card key={p.title} className="pillar">
                   <CardHeader>
-                    <Badge variant="outline" className="pillar__num">{String(i + 1).padStart(2, "0")}</Badge>
+                    <p.icon className="pillar__icon" aria-hidden="true" strokeWidth={1.25} />
                     <CardTitle className="pillar__title">{p.title}</CardTitle>
                   </CardHeader>
                   <CardContent><CardDescription className="pillar__text">{p.text}</CardDescription></CardContent>
