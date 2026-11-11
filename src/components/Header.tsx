@@ -20,7 +20,7 @@ export function Header() {
     <header className={`site-header${scrolled ? " is-scrolled" : ""}`} id="site-header">
       <div className="container site-header__inner">
         <a className="brand" href="#top" aria-label="Henry Montego Homes — back to top">
-          <img src="assets/logo/logo.png" alt="Henry Montego Homes" width={1310} height={580} />
+          <img src="assets/logo/logo.png" alt="Henry Montego Homes" width={496} height={331} />
         </a>
 
         <nav className="site-nav" aria-label="Primary">

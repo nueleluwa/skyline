@@ -62,17 +62,50 @@ export function EnquiryLink({ type, children, className, ...rest }: { type?: str
 /* ---- Scroll reveal, header state, active section --------------------------- */
 export function useReveal() {
   useEffect(() => {
-    document.documentElement.classList.add("js")
-    const items = Array.from(document.querySelectorAll("[data-reveal]"))
+    const root = document.documentElement
+    root.classList.add("js")
+    ;(window as unknown as { __revealReady?: boolean }).__revealReady = true
+
+    const items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"))
+    const counters = Array.from(document.querySelectorAll<HTMLElement>("[data-count]"))
+
+    // Give each child of a stagger group its position in the sequence (drives the CSS delay).
+    items.forEach((el) => {
+      if ((el.dataset.reveal ?? "").startsWith("stagger")) {
+        Array.from(el.children).forEach((c, i) => (c as HTMLElement).style.setProperty("--i", String(i)))
+      }
+    })
+
     if (reduceMotion() || !("IntersectionObserver" in window)) {
       items.forEach((el) => el.classList.add("is-visible"))
       return
     }
+
     const io = new IntersectionObserver((entries, obs) => {
       entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-visible"); obs.unobserve(e.target) } })
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 })
     items.forEach((el) => io.observe(el))
-    return () => io.disconnect()
+
+    // Count-up for figures. The final value is always in the markup; it is only replayed when first seen.
+    const countIo = new IntersectionObserver((entries, obs) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return
+        obs.unobserve(e.target)
+        const el = e.target as HTMLElement
+        const m = (el.textContent ?? "").trim().match(/^(\d+)(.*)$/)
+        if (!m) return
+        const target = Number(m[1]), suffix = m[2], dur = 1400, t0 = performance.now()
+        const tick = (now: number) => {
+          const t = Math.min(1, (now - t0) / dur)
+          el.textContent = String(Math.round(target * (1 - Math.pow(1 - t, 4)))) + suffix
+          if (t < 1) requestAnimationFrame(tick)
+        }
+        requestAnimationFrame(tick)
+      })
+    }, { threshold: 0.6 })
+    counters.forEach((el) => countIo.observe(el))
+
+    return () => { io.disconnect(); countIo.disconnect() }
   }, [])
 }
 

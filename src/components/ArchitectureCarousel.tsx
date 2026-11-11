@@ -32,7 +32,7 @@ export function ArchitectureCarousel() {
   }, [api])
 
   return (
-    <div className="arch-carousel" data-reveal style={{ ["--d" as string]: ".12s" }}>
+    <div className="arch-carousel" data-reveal="left">
       <Carousel setApi={setApi} opts={{ loop: true }} aria-label="Montego Skyline II by day and by night">
         <CarouselContent>
           {slides.map((s, i) => (

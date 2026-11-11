@@ -2,7 +2,6 @@ import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { BedDouble, Check, ConciergeBell, Waves } from "lucide-react"
 import { config } from "@/config"
 import { Header } from "@/components/Header"
 import { ArchitectureCarousel } from "@/components/ArchitectureCarousel"
@@ -23,9 +22,9 @@ const pillars = [
 ]
 
 const clusters = [
-  { title: "Living", icon: BedDouble, blurb: "The residence", items: ["Ocean and skyline views through full-height glazing", "Master suite with walk-in closet", "Two further bedrooms, each with its own aspect", "Living and dining room opening onto the terrace", "Kitchen with pantry and laundry, kept apart from the living spaces", "Private pool terrace, with water at the edge of the living room"] },
-  { title: "Leisure", icon: Waves, blurb: "At the ocean's edge", items: ["Infinity pools that appear to meet the Atlantic, fed by water drawn from the ocean's edge", "A fitness and wellness centre designed to resort standards", "A private residents' club for entertaining and connection", "Fine dining and curated retail at the foot of the towers"] },
-  { title: "Lifestyle and Service", icon: ConciergeBell, blurb: "Every day, effortless", items: ["Round-the-clock security and white-glove concierge", "Secure, dedicated parking for residents and guests"] },
+  { title: "Living", blurb: "The residence", items: ["Ocean and skyline views through full-height glazing", "Master suite with walk-in closet", "Two further bedrooms, each with its own aspect", "Living and dining room opening onto the terrace", "Kitchen with pantry and laundry, kept apart from the living spaces", "Private pool terrace, with water at the edge of the living room"] },
+  { title: "Leisure", blurb: "At the ocean's edge", items: ["Infinity pools that appear to meet the Atlantic, fed by water drawn from the ocean's edge", "A fitness and wellness centre designed to resort standards", "A private residents' club for entertaining and connection", "Fine dining and curated retail at the foot of the towers"] },
+  { title: "Lifestyle and Service", blurb: "Every day, effortless", items: ["Round-the-clock security and white-glove concierge", "Secure, dedicated parking for residents and guests"] },
 ]
 
 const gallery: (GalleryItem & { w: number; h: number })[] = [
@@ -72,9 +71,9 @@ function Page() {
 
         {/* FIGURES: only confirmed figures. Add height, residences, built-up area and coastal frontage once verified. */}
         <section className="figures" aria-label="Montego Skyline II at a glance">
-          <ul className="container figures__list" data-reveal>
-            <li><strong>2</strong><span>Towers</span><small>Two curved wings, one skyline</small></li>
-            <li><strong>20</strong><span>Floors</span><small>Rising above the Atlantic coast</small></li>
+          <ul className="container figures__list" data-reveal="stagger">
+            <li><strong data-count>2</strong><span>Towers</span><small>Two curved wings, one skyline</small></li>
+            <li><strong data-count>20</strong><span>Floors</span><small>Rising above the Atlantic coast</small></li>
           </ul>
         </section>
 
@@ -96,7 +95,7 @@ function Page() {
 
         {/* STATEMENT BANNER */}
         <section className="statement" aria-label="Statement">
-          <blockquote className="container" data-reveal>
+          <blockquote className="container" data-reveal="stagger">
             <p>World-class luxury no longer belongs exclusively to Dubai, Miami, Monaco or Manhattan.</p>
             <p className="statement__close">It belongs here, in Lagos.</p>
           </blockquote>
@@ -132,7 +131,7 @@ function Page() {
         {/* ARCHITECTURE. The bracketed "engineered for the future" line is left out until the claim is confirmed. */}
         <section className="section architecture" id="architecture" aria-labelledby="architecture-title">
           <div className="container split">
-            <div data-reveal>
+            <div data-reveal="right">
               <p className="eyebrow">The Architecture</p>
               <h2 className="h2" id="architecture-title">Designed to be seen <Accent>from across the lagoon.</Accent></h2>
               <p className="lede">Two curved wings rise and meet in a V, an architectural gesture that frames the Atlantic and gives the Lagos skyline a new silhouette. Turquoise water cascades down the terraces, linking the towers to the ocean they face.</p>
@@ -155,7 +154,7 @@ function Page() {
                 <EnquiryLink className="btn btn--outline-dark" type="Floor plans and brochure">Ask for the brochure</EnquiryLink>
               </div>
             </div>
-            <button className="plan__open" type="button" data-reveal style={{ ["--d" as string]: ".12s" }} aria-label="Open the typical apartment floor plan in a larger view" onClick={() => setPlanOpen(true)}>
+            <button className="plan__open" type="button" data-reveal="image" style={{ ["--d" as string]: ".12s" }} aria-label="Open the typical apartment floor plan in a larger view" onClick={() => setPlanOpen(true)}>
               <img src="assets/img/floorplan-1535.webp" srcSet="assets/img/floorplan-800.webp 800w, assets/img/floorplan-1535.webp 1535w" sizes="(max-width: 900px) 100vw, 58vw" width={1535} height={1023} loading="lazy" alt="Typical apartment floor plan showing master bedroom, two further bedrooms, living room, kitchen, pantry, laundry and a swimming pool terrace" />
               <span className="plan__hint"><Icon name="expand" /> Enlarge plan</span>
             </button>
@@ -170,20 +169,16 @@ function Page() {
               <h2 className="h2" id="amenities-title">Every detail, <Accent>considered.</Accent></h2>
               <p className="lede">From the front door to the rooftop pools, a standard of living designed without compromise.</p>
             </header>
-            <div className="amenity-clusters" data-reveal style={{ ["--d" as string]: ".12s" }}>
+            <div className="amenity-clusters" data-reveal="stagger">
               {clusters.map((c, i) => (
-                <Card key={c.title} className="cluster">
-                  <CardHeader className="cluster__head">
-                    <span className="cluster__icon"><c.icon aria-hidden="true" strokeWidth={1.25} /></span>
+                <article key={c.title} className="cluster" aria-labelledby={`cluster-${i}`}>
+                  <header className="cluster__head">
                     <span className="cluster__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-                    <CardTitle className="cluster__title">{c.title}</CardTitle>
                     <p className="cluster__blurb">{c.blurb}</p>
-                  </CardHeader>
-                  <Separator className="cluster__rule" />
-                  <CardContent>
-                    <ul>{c.items.map((t) => <li key={t}><Check aria-hidden="true" strokeWidth={2} />{t}</li>)}</ul>
-                  </CardContent>
-                </Card>
+                  </header>
+                  <h3 className="cluster__title" id={`cluster-${i}`}>{c.title}</h3>
+                  <ul className="cluster__list">{c.items.map((t) => <li key={t}>{t}</li>)}</ul>
+                </article>
               ))}
             </div>
             <div className="amenities__foot" data-reveal>
@@ -197,10 +192,10 @@ function Page() {
 
         {/* EXPERIENCE */}
         <section className="experience" id="experience" aria-labelledby="experience-title">
-          <div className="experience__media">
+          <div className="experience__media" data-reveal="image">
             <img src="assets/img/experience-sunset-1494.webp" srcSet="assets/img/experience-sunset-900.webp 900w, assets/img/experience-sunset-1494.webp 1494w" sizes="(max-width: 900px) 100vw, 60vw" width={1494} height={1051} loading="lazy" alt="Sunset render of Montego Skyline II, with turquoise water cascading down the curved facade" />
           </div>
-          <div className="experience__copy" data-reveal>
+          <div className="experience__copy" data-reveal="right" style={{ ["--d" as string]: ".15s" }}>
             <p className="eyebrow">The Experience</p>
             <h2 className="h2" id="experience-title">Where the Atlantic Becomes Part of Home.</h2>
             <p className="lede">Water drawn from the ocean&rsquo;s edge courses through the development, feeding a series of infinity pools that dissolve the boundary between architecture and sea.</p>
@@ -216,7 +211,7 @@ function Page() {
               <h2 className="h2" id="gallery-title">Architecture, Up Close.</h2>
               <p className="lede">Curved terraces, cascading water and a landscaped podium &mdash; details of Montego Skyline II.</p>
             </header>
-            <div className="gallery" data-reveal role="group" aria-label="Gallery of Montego Skyline II">
+            <div className="gallery" data-reveal="stagger-image" role="group" aria-label="Gallery of Montego Skyline II">
               {gallery.map((g, i) => (
                 <button key={g.src} className="gallery__item" type="button" onClick={() => setLightbox(i)}>
                   <img src={g.src} width={g.w} height={g.h} loading="lazy" alt={g.alt} />
@@ -283,10 +278,10 @@ function Page() {
               <p className="eyebrow">The Developer</p>
               <h2 className="h2" id="developer-title">Built by a team <Accent>that delivers.</Accent></h2>
             </header>
-            <ul className="figures__list figures__list--light" data-reveal style={{ ["--d" as string]: ".12s" }}>
-              <li><strong>10</strong><span>Years in business</span></li>
-              <li><strong>5</strong><span>Estates delivered</span></li>
-              <li><strong>200+</strong><span>Homes handed over</span></li>
+            <ul className="figures__list figures__list--light" data-reveal="stagger">
+              <li><strong data-count>10</strong><span>Years in business</span></li>
+              <li><strong data-count>5</strong><span>Estates delivered</span></li>
+              <li><strong data-count>200+</strong><span>Homes handed over</span></li>
             </ul>
             <div className="developer__cta" data-reveal>
               <EnquiryLink className="btn btn--dark" type="General enquiry">Meet Henry Montego Homes <Icon name="arrow" /></EnquiryLink>
@@ -318,12 +313,12 @@ function Page() {
       <footer className="footer">
         <div className="container">
           <div className="footer__top">
-            <a className="footer__brand" href="#top" aria-label="Henry Montego Homes — back to top"><img src="assets/logo/logo.png" alt="Henry Montego Homes" width={1310} height={580} loading="lazy" /></a>
+            <a className="footer__brand" href="#top" aria-label="Henry Montego Homes — back to top"><img src="assets/logo/logo-footer.png" alt="Henry Montego Homes" width={754} height={503} loading="lazy" /></a>
             <p className="footer__statement">Creating developments that elevate African real estate to the highest global standard.</p>
             <EnquiryLink className="btn btn--dark">Request a Private Briefing <Icon name="arrow" /></EnquiryLink>
           </div>
           <Separator className="footer__rule" />
-          <div className="footer__mid">
+          <div className="footer__mid" data-reveal="stagger">
             <div>
               <h2>Explore</h2>
               <p><a href="#vision">The Vision</a><br /><a href="#development">The Development</a><br /><a href="#residences">Residences</a><br /><a href="#amenities">Amenities</a><br /><a href="#location">Location</a><br /><a href="#enquire">Enquire</a></p>
